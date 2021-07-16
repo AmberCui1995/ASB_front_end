@@ -47,71 +47,67 @@ const RegisterCardForm = () => {
                 >
                     <h2>Welcome message</h2>
                 </div>
-                <div >
-                    <form
-                        onSubmit={formik.handleSubmit}
-                    >
-                        <div
-                        >
-                            <Grid container justifyContent="space-around" direction="column">
-                                <TextField
-                                    variant="outlined"
-                                    fullWidth
-                                    id="creditCardNumber"
-                                    name="creditCardNumber"
-                                    label="Credit Card Number"
-                                    value={formik.values.creditCardNumber}
-                                    onChange={formik.handleChange}
-                                    error={
-                                        formik.touched.creditCardNumber &&
-                                        Boolean(formik.errors.creditCardNumber)
-                                    }
-                                    helperText={
-                                        formik.touched.creditCardNumber &&
-                                        formik.errors.creditCardNumber
-                                    }
-                                />
-                            </Grid>
-                            <Grid container justifyContent="space-between" spacing={5}>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        fullWidth
-                                        variant="outlined"
-                                        id="cvc"
-                                        name="cvc"
-                                        label="CVC"
-                                        value={formik.values.cvc}
-                                        onChange={formik.handleChange}
-                                        error={formik.touched.cvc && Boolean(formik.errors.cvc)}
-                                        helperText={formik.touched.cvc && formik.errors.cvc}
-                                    />
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        fullWidth
-                                        variant="outlined"
-                                        id="expiry"
-                                        type="date"
-                                        value={formik.values.expiry}
-                                        onChange={formik.handleChange}
-                                        error={
-                                            formik.touched.expiry && Boolean(formik.errors.expiry)
-                                        }
-                                        helperText={formik.touched.expiry && formik.errors.expiry}
-                                    />
-                                </Grid>
-                            </Grid>
-                            <Button
-                                color="primary"
-                                variant="contained"
+                <form
+                    onSubmit={formik.handleSubmit}
+                >
+
+                    <Grid container justifyContent="space-around" direction="column">
+                        <TextField
+                            variant="outlined"
+                            fullWidth
+                            id="creditCardNumber"
+                            name="creditCardNumber"
+                            label="Credit Card Number"
+                            value={formik.values.creditCardNumber}
+                            onChange={formik.handleChange}
+                            error={
+                                formik.touched.creditCardNumber &&
+                                Boolean(formik.errors.creditCardNumber)
+                            }
+                            helperText={
+                                formik.touched.creditCardNumber &&
+                                formik.errors.creditCardNumber
+                            }
+                        />
+                    </Grid>
+                    <Grid container justifyContent="space-between" spacing={5}>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
                                 fullWidth
-                                type="submit"
-                            >
-                                Submit
-                            </Button>
-                        </div>
-                    </form>
-                </div>
+                                variant="outlined"
+                                id="cvc"
+                                name="cvc"
+                                label="CVC"
+                                value={formik.values.cvc}
+                                onChange={formik.handleChange}
+                                error={formik.touched.cvc && Boolean(formik.errors.cvc)}
+                                helperText={formik.touched.cvc && formik.errors.cvc}
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                fullWidth
+                                variant="outlined"
+                                id="expiry"
+                                type="date"
+                                value={formik.values.expiry}
+                                onChange={formik.handleChange}
+                                error={
+                                    formik.touched.expiry && Boolean(formik.errors.expiry)
+                                }
+                                helperText={formik.touched.expiry && formik.errors.expiry}
+                            />
+                        </Grid>
+                    </Grid>
+                    <Button
+                        color="primary"
+                        variant="contained"
+                        fullWidth
+                        type="submit"
+                    >
+                        Submit
+                    </Button>
+                </form>
             </div>
         </div>
     );
