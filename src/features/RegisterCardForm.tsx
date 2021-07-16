@@ -1,12 +1,31 @@
 import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import MenuIcon from "@material-ui/icons/Menu";
+import Box from "@material-ui/core/Box";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 
 import AppBar from "../components/AppBar";
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    main: {
+      flexGrow: 1,
+      padding: theme.spacing(0, 2, 2, 2),
+    },
+    form: {
+        width: "100%",
+        display: "flex",
+        height: "100%",
+        flexDirection: "column",
+        justifyContent: "space-around",
+
+    }
+  })
+);
 
 const validationSchema = yup.object().shape({
     creditCardNumber: yup
@@ -19,6 +38,8 @@ const validationSchema = yup.object().shape({
 });
 
 const RegisterCardForm = () => {
+    const classes = useStyles();
+
     const formik = useFormik({
         initialValues: {
             creditCardNumber: "",
@@ -39,18 +60,16 @@ const RegisterCardForm = () => {
         );
     };
     return (
-        <div >
-            <AppBar icon={<Icon />} title="Register Card Form" />
-            <div>
-                <div
+        <Box display="flex" flexDirection="column" height="100%">
 
-                >
+            <AppBar icon={<Icon />} title="Register Card Form" />
+            <div className={classes.main}>
+                <div>
                     <h2>Welcome message</h2>
                 </div>
-                <form
+                <form className={classes.form}
                     onSubmit={formik.handleSubmit}
                 >
-
                     <Grid container justifyContent="space-around" direction="column">
                         <TextField
                             variant="outlined"
@@ -109,7 +128,7 @@ const RegisterCardForm = () => {
                     </Button>
                 </form>
             </div>
-        </div>
+        </Box>
     );
 };
 

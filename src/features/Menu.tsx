@@ -1,27 +1,43 @@
+import { useHistory, Link } from "react-router-dom";
 import Box from "@material-ui/core/Box";
-import { useHistory } from "react-router-dom";
-
+import Container from "@material-ui/core/Container";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+
 import AppBar from "../components/AppBar";
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    appBar: {
+      padding: theme.spacing(3, 1),
+    },
+    main: {
+      flexGrow: 1,
+      padding: theme.spacing(2),
+    },
+  })
+);
+
 const Menu = () => {
+  const classes = useStyles();
 
-    const BackButton = () => {
-        let history = useHistory();
-        const handleClick = () => {
-            history.goBack();
-        };
-        return <ArrowBackIcon onClick={handleClick} />;
-    };
+  let history = useHistory();
 
-    return (
-        <div>
-            <AppBar icon={<BackButton />} title="Menu" />
-            <div>
+  const handleClick = () => {
+    history.goBack();
+  };
 
-                <h2>Menu content</h2>
-            </div>
-        </div>);
+  const BackButton = () => {
+    return <ArrowBackIcon onClick={handleClick} />;
+  };
+  return (
+    <Box display="flex" flexDirection="column" height="100%">
+      <AppBar title="Menu" icon={<BackButton />} />
+      <div className={classes.main}>
+        <h3>Menu</h3>
+      </div>
+    </Box>
+  );
 };
 
 export default Menu;

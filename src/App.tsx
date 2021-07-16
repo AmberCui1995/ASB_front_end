@@ -1,15 +1,13 @@
-
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
-import { createStyles, Theme } from "@material-ui/core/styles";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+
 import RegisterCardForm from "./features/RegisterCardForm";
 import Menu from "./features/Menu";
-import { makeStyles } from "@material-ui/styles";
 import Container from './components/Container'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -25,18 +23,18 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-const App = () => {
 
+function App() {
   const classes = useStyles();
   return (
-    <>
-      <div className={classes.app}>
+    <Router>
+      <Box className={classes.app}>
         <CssBaseline />
         <Container>
-          <Router>
+          <Paper className={classes.paper}>
             <Switch>
               <Route exact path="/">
-                <Redirect to="/register-card-form" />
+              <RegisterCardForm />
               </Route>
               <Route exact path="/register-card-form">
                 <RegisterCardForm />
@@ -45,10 +43,10 @@ const App = () => {
                 <Menu />
               </Route>
             </Switch>
-          </Router>
+            </Paper>
         </Container>
-      </div>
-    </>
+      </Box>
+    </Router>
   );
 }
 
