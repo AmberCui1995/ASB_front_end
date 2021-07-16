@@ -15,13 +15,13 @@ const Menu = () => {
     };
 
     return (
-        <Box>
+        <div>
             <AppBar icon={<BackButton />} title="Menu" />
             <div>
 
                 <h2>Menu content</h2>
             </div>
-        </Box>);
+        </div>);
 };
 
 export default Menu;
