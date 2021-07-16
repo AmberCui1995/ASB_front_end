@@ -17,6 +17,10 @@ const Menu = () => {
     return (
         <Box>
             <AppBar icon={<BackButton />} title="Menu" />
+            <div>
+
+                <h2>Menu content</h2>
+            </div>
         </Box>);
 };
 
