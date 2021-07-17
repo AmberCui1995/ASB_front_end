@@ -9,48 +9,64 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 
 import AppBar from "../components/AppBar";
+import api from "./api";
+import { string } from "yup/lib/locale";
 
 const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    main: {
-      flexGrow: 1,
-      padding: theme.spacing(0, 2, 2, 2),
-    },
-    form: {
-        width: "100%",
-        display: "flex",
-        height: "100%",
-        flexDirection: "column",
-        justifyContent: "space-around",
+    createStyles({
+        main: {
+            flexGrow: 1,
+            padding: theme.spacing(0, 2, 2, 2),
+        },
+        form: {
+            width: "100%",
+            display: "flex",
+            height: "100%",
+            flexDirection: "column",
+            justifyContent: "space-around",
 
-    }
-  })
+        }
+    })
 );
 
 const validationSchema = yup.object().shape({
-    creditCardNumber: yup
+    cardNumber: yup
         .number()
         .required("Credit Card Number is required")
         .positive()
         .integer(),
     cvc: yup.number().required().positive().integer(),
-    expiry: yup.date().required(),
+    expiryDate: yup.date().required(),
 });
 
+
+interface CardForm {
+    name: string,
+    cardNumber: number,
+    cvc: number,
+    expiryDate: string
+}
 const RegisterCardForm = () => {
     const classes = useStyles();
+    const userName = "AmberC"
 
     const formik = useFormik({
         initialValues: {
-            creditCardNumber: "",
+            name: userName,
+            cardNumber: "",
             cvc: "",
-            expiry: "",
+            expiryDate: ""
         },
+
         validationSchema: validationSchema,
-        onSubmit: (values) => {
-            console.log(values);
-        },
-    });
+        onSubmit: async (values) => {
+            console.log(typeof (Number(values.cardNumber)))
+            api.post("/cards", { name: values.name, cardNumber: Number(values.cardNumber), cvc: Number(values.cvc), expiryDate: values.expiryDate })
+                .then(res => alert("success")).catch(err => alert("fail"));
+        }
+
+    }
+    );
 
     const Icon = () => {
         return (
@@ -65,7 +81,7 @@ const RegisterCardForm = () => {
             <AppBar icon={<Icon />} title="Register Card Form" />
             <div className={classes.main}>
                 <div>
-                    <h2>Welcome message</h2>
+                    <h2>Welcome {userName}</h2>
                 </div>
                 <form className={classes.form}
                     onSubmit={formik.handleSubmit}
@@ -74,18 +90,18 @@ const RegisterCardForm = () => {
                         <TextField
                             variant="outlined"
                             fullWidth
-                            id="creditCardNumber"
-                            name="creditCardNumber"
+                            id="cardNumber"
+                            name="cardNumber"
                             label="Credit Card Number"
-                            value={formik.values.creditCardNumber}
+                            value={formik.values.cardNumber}
                             onChange={formik.handleChange}
                             error={
-                                formik.touched.creditCardNumber &&
-                                Boolean(formik.errors.creditCardNumber)
+                                formik.touched.cardNumber &&
+                                Boolean(formik.errors.cardNumber)
                             }
                             helperText={
-                                formik.touched.creditCardNumber &&
-                                formik.errors.creditCardNumber
+                                formik.touched.cardNumber &&
+                                formik.errors.cardNumber
                             }
                         />
                     </Grid>
@@ -107,14 +123,14 @@ const RegisterCardForm = () => {
                             <TextField
                                 fullWidth
                                 variant="outlined"
-                                id="expiry"
+                                id="expiryDate"
                                 type="date"
-                                value={formik.values.expiry}
+                                value={formik.values.expiryDate}
                                 onChange={formik.handleChange}
                                 error={
-                                    formik.touched.expiry && Boolean(formik.errors.expiry)
+                                    formik.touched.expiryDate && Boolean(formik.errors.expiryDate)
                                 }
-                                helperText={formik.touched.expiry && formik.errors.expiry}
+                                helperText={formik.touched.expiryDate && formik.errors.expiryDate}
                             />
                         </Grid>
                     </Grid>
