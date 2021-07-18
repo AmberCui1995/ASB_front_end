@@ -3,6 +3,11 @@ This is a simple web app to pass a card number, cvc, and date to a backend for v
 
 It is built using React with forms from [formik](https://formik.org/) and basic validation in [Yup](https://www.npmjs.com/package/yup)
 
+## UI for the application
+The UI for the application looks like above.
+Click the submit button to upload card number,cvc and expiry date. 
+![image](https://user-images.githubusercontent.com/27046313/126064988-e16bb860-3282-4c76-a48c-76249ee6ed98.png)
+
 ## Available Scripts
 
 In the project directory, you can run:
