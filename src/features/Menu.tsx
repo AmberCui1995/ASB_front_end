@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
       padding: theme.spacing(2),
     },
+    header: {
+      textAlign: "center",
+    },
   })
 );
 
@@ -34,7 +37,7 @@ const Menu = () => {
     <Box display="flex" flexDirection="column" height="100%">
       <AppBar title="Menu" icon={<BackButton />} />
       <div className={classes.main}>
-        <h3>Menu</h3>
+        <h2 className={classes.header}>Menu</h2>
       </div>
     </Box>
   );

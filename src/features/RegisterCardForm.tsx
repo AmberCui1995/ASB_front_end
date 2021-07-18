@@ -7,16 +7,20 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-
 import AppBar from "../components/AppBar";
 import api from "./api";
 import { string } from "yup/lib/locale";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         main: {
             flexGrow: 1,
             padding: theme.spacing(0, 2, 2, 2),
+        },
+        header: {
+            textAlign: "center",
         },
         form: {
             width: "100%",
@@ -39,13 +43,6 @@ const validationSchema = yup.object().shape({
     expiryDate: yup.date().required(),
 });
 
-
-interface CardForm {
-    name: string,
-    cardNumber: number,
-    cvc: number,
-    expiryDate: string
-}
 const RegisterCardForm = () => {
     const classes = useStyles();
     const userName = "AmberC"
@@ -60,9 +57,15 @@ const RegisterCardForm = () => {
 
         validationSchema: validationSchema,
         onSubmit: async (values) => {
-            console.log(typeof (Number(values.cardNumber)))
+            console.log("card name:" + values.name)
+            console.log("card number:" + values.cardNumber)
+            console.log("card cvc:" + values.cvc)
             api.post("/cards", { name: values.name, cardNumber: Number(values.cardNumber), cvc: Number(values.cvc), expiryDate: values.expiryDate })
-                .then(res => alert("success")).catch(err => alert("fail"));
+                .then(res => toast.success("Submit Successfully", {
+                    position: toast.POSITION.TOP_CENTER
+                })).catch(err => toast.error("Cannot Submit, because" + err, {
+                    position: toast.POSITION.TOP_CENTER
+                }));
         }
 
     }
@@ -81,7 +84,7 @@ const RegisterCardForm = () => {
             <AppBar icon={<Icon />} title="Register Card Form" />
             <div className={classes.main}>
                 <div>
-                    <h2>Welcome {userName}</h2>
+                    <h2 className={classes.header}>Welcome {userName}</h2>
                 </div>
                 <form className={classes.form}
                     onSubmit={formik.handleSubmit}
@@ -144,7 +147,11 @@ const RegisterCardForm = () => {
                     </Button>
                 </form>
             </div>
-        </Box>
+            <ToastContainer
+                autoClose={3000}
+            />
+        </Box >
+
     );
 };
 

@@ -10,14 +10,18 @@ const useStyles = makeStyles((theme: Theme) =>
             width: "100%",
             display: "flex",
             flexDirection: "row",
-            borderStyle: "solid"
+            backgroundColor: "#3f51b5"
 
         },
         icon: {
-            flexGrow: 1
+            flexGrow: 1,
+            color: "white",
+            tabSize: "0.73em",
         },
         title: {
-            flexGrow: 1
+            flexGrow: 1,
+            color: "white"
+
         },
         divider: {
             margin: theme.spacing(1, 0),
@@ -33,12 +37,12 @@ const AppBar = (prop: Props) => {
     const classes = useStyles();
     return (
         <div className={classes.appBar}>
-            <div className={classes.icon}>
+            <i className={classes.icon}>
                 {prop.icon}
-            </div><div className={classes.title}>
-                {prop.title}
-            </div>
-        </div>
+            </i><h1 className={classes.title}> {prop.title}</h1>
+        </div >
+
+
     );
 };
 
